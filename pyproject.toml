@@ -1,0 +1,21 @@
+[project]
+name = "genai-client-intelligence"
+version = "0.1.0"
+description = "GenAI Client Intelligence Prototype"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai",
+    "pydantic>=2.0",
+    "python-dotenv",
+    "streamlit",
+    "tenacity",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.uv]
+package = false
