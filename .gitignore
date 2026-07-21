@@ -9,10 +9,14 @@ __pycache__/
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
 # Testing
 .pytest_cache/
 .coverage
+htmlcov/
+.tox/
 
 # Streamlit
 .streamlit/secrets.toml
@@ -22,5 +26,9 @@ ENV/
 .idea/
 .DS_Store
 Thumbs.db
-
 todo
+
+# Build / Distribution
+build/
+dist/
+*.egg-info/
