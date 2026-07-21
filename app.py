@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from backend.pipeline import process_pipeline
 from backend.models import ExtractedField, RiskFlag
 from backend.scoring import calculate_health_score
+from backend.assistant import process_assistant_query, generate_suggested_questions
 
 # Load environment variables
 load_dotenv()
@@ -56,7 +57,11 @@ def render_field_card(title: str, field: ExtractedField, edit_mode: bool, key_pr
             st.caption(f"Confidence: {field.confidence:.2f}")
             
             if field.evidence:
-                with st.expander("Evidence"):
+                with st.expander("Explain AI"):
+                    st.write("**Why was this generated?**")
+                    st.write("**Reasoning:** Extracted based on conversation evidence.")
+                    st.write(f"**Confidence:** {field.confidence:.2f}")
+                    st.write("**Evidence:**")
                     for e in field.evidence:
                         st.write(f"- \"{e}\"")
 
@@ -75,7 +80,11 @@ def render_risk_card(risk: RiskFlag, edit_mode: bool, idx: int):
             st.markdown(f"**{risk.title}** ({risk.severity} Severity)")
             st.write(f"Reason: {risk.reason}")
             st.caption(f"Confidence: {risk.confidence:.2f}")
-            with st.expander("Evidence"):
+            with st.expander("Explain AI"):
+                st.write("**Why was this generated?**")
+                st.write(f"**Reasoning:** {risk.reason}")
+                st.write(f"**Confidence:** {risk.confidence:.2f}")
+                st.write("**Evidence:**")
                 for e in risk.evidence:
                     st.write(f"- \"{e}\"")
 
@@ -121,6 +130,7 @@ def main():
                 # Use cached function to prevent identical API calls
                 report = cached_process_pipeline(conversation)
                 st.session_state['report'] = report
+                st.session_state['conversation'] = conversation
                 st.session_state['edit_mode'] = False # Reset edit mode
                 st.success("Processing complete!")
             except Exception as e:
@@ -272,6 +282,55 @@ def main():
                 st.error("Report rejected.")
         
         st.caption("The AI never makes the final decision. The coach always reviews.")
+        
+        # --- AI Client Intelligence Assistant ---
+        st.divider()
+        st.header("AI Client Intelligence Assistant")
+        
+        if 'assistant_cache' not in st.session_state:
+            st.session_state['assistant_cache'] = {}
+            
+        def set_query(q):
+            st.session_state['user_query'] = q
+            
+        st.write("**Suggested Questions:**")
+        suggested = generate_suggested_questions(report)
+        
+        cols = st.columns(4)
+        for i, q in enumerate(suggested):
+            cols[i % 4].button(q, on_click=set_query, args=(q,), key=f"sugg_{i}")
+            
+        user_query = st.text_input("Ask anything about this conversation...", 
+                                   value=st.session_state.get('user_query', ''),
+                                   key="user_query_input")
+                                   
+        if st.button("Ask", type="primary") and user_query:
+            saved_conversation = st.session_state.get('conversation', '')
+            cache_key = (hash(saved_conversation), hash(report.model_dump_json()), user_query)
+            
+            if cache_key in st.session_state['assistant_cache']:
+                result = st.session_state['assistant_cache'][cache_key]
+            else:
+                with st.spinner("Analyzing..."):
+                    try:
+                        result = process_assistant_query(user_query, report, saved_conversation)
+                        st.session_state['assistant_cache'][cache_key] = result
+                    except Exception as e:
+                        st.error(f"Error processing query: {e}")
+                        result = None
+            
+            if result:
+                with st.container(border=True):
+                    st.markdown(f"**Answer:** {result.answer}")
+                    st.caption(f"**Confidence:** {result.confidence:.2f} | **Status:** {result.status}")
+                    st.markdown(f"**Reasoning:** {result.reasoning}")
+                    
+                    if result.sources:
+                        with st.expander("View Evidence"):
+                            for s in result.sources:
+                                speaker_str = f" ({s.speaker})" if s.speaker else ""
+                                day_str = f" [{s.day}]" if s.day else ""
+                                st.write(f"- \"{s.quote}\"{speaker_str}{day_str}")
 
 if __name__ == "__main__":
     main()

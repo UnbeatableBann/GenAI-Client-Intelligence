@@ -55,3 +55,15 @@ class ReasoningResult(BaseModel):
 class FinalReport(BaseModel):
     extracted_info: ExtractedInformation
     reasoning: ReasoningResult
+
+class AssistantSource(BaseModel):
+    day: Optional[str] = Field(default=None)
+    speaker: Optional[str] = Field(default=None)
+    quote: str
+
+class AssistantResponse(BaseModel):
+    answer: str
+    confidence: float
+    status: str
+    reasoning: str
+    sources: List[AssistantSource] = Field(default_factory=list)
