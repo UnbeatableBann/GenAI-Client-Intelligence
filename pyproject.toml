@@ -6,8 +6,10 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "google-genai",
+    "matplotlib>=3.11.1",
     "pydantic>=2.0",
     "python-dotenv",
+    "reportlab>=5.0.0",
     "streamlit",
     "tenacity",
 ]

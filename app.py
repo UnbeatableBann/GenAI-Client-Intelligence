@@ -291,6 +291,50 @@ def main():
         
         st.caption("The AI never makes the final decision. The coach always reviews.")
         
+        # --- Report Actions ---
+        st.divider()
+        st.header("Report Actions")
+        
+        if 'pdf_bytes' not in st.session_state:
+            st.session_state['pdf_bytes'] = None
+
+        act_col1, act_col2, act_col3 = st.columns(3)
+        
+        with act_col1:
+            if st.button("📄 Generate Professional PDF", use_container_width=True, type="primary"):
+                with st.spinner("Generating PDF..."):
+                    from backend.pdf import generate_pdf_report
+                    try:
+                        st.session_state['pdf_bytes'] = generate_pdf_report(report, health_data)
+                        st.success("PDF Generated Successfully!")
+                    except Exception as e:
+                        st.error(f"Failed to generate PDF: {e}")
+
+        if st.session_state['pdf_bytes']:
+            with act_col2:
+                st.download_button(
+                    label="📥 Download PDF",
+                    file_name="Client_Report.pdf",
+                    mime="application/pdf",
+                    data=bytes(st.session_state['pdf_bytes']),
+                    use_container_width=True
+                )
+            with act_col3:
+                import urllib.parse
+                wa_text = f"📊 *Client Intelligence Report*\n"
+                wa_text += f"*Health Score:* {health_data['overall_score']}/100\n\n"
+                wa_text += f"*Summary:*\n{info.weekly_summary.value if info.weekly_summary.value else 'N/A'}\n\n"
+                if info.risk_flags:
+                    wa_text += f"⚠️ *Risks Detected:* {len(info.risk_flags)}\n"
+                wa_text += f"\n*(Download the full PDF for more details)*"
+                
+                wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(wa_text)}"
+                st.markdown(f'<a href="{wa_url}" target="_blank" style="display: block; text-align: center; background-color: #25D366; color: white; padding: 6px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 2px;">💬 Share via WhatsApp</a>', unsafe_allow_html=True)
+                
+            with st.expander("👁️ Preview PDF", expanded=True):
+                from backend.pdf import get_pdf_preview_html
+                st.markdown(get_pdf_preview_html(st.session_state['pdf_bytes']), unsafe_allow_html=True)
+        
         # --- AI Client Intelligence Assistant ---
         st.divider()
         st.header("AI Client Intelligence Assistant")
