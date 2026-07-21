@@ -321,12 +321,12 @@ def main():
                 )
             with act_col3:
                 import urllib.parse
-                wa_text = f"📊 *Client Intelligence Report*\n"
+                wa_text = "📊 *Client Intelligence Report*\n"
                 wa_text += f"*Health Score:* {health_data['overall_score']}/100\n\n"
                 wa_text += f"*Summary:*\n{info.weekly_summary.value if info.weekly_summary.value else 'N/A'}\n\n"
                 if info.risk_flags:
                     wa_text += f"⚠️ *Risks Detected:* {len(info.risk_flags)}\n"
-                wa_text += f"\n*(Download the full PDF for more details)*"
+                wa_text += "\n*(Download the full PDF for more details)*"
                 
                 wa_url = f"https://api.whatsapp.com/send?text={urllib.parse.quote(wa_text)}"
                 st.markdown(f'<a href="{wa_url}" target="_blank" style="display: block; text-align: center; background-color: #25D366; color: white; padding: 6px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 2px;">💬 Share via WhatsApp</a>', unsafe_allow_html=True)
