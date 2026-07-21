@@ -15,6 +15,13 @@ st.set_page_config(page_title="GenAI Client Intelligence", layout="wide")
 def cached_process_pipeline(conversation: str):
     return process_pipeline(conversation)
 
+def load_sample_conversation():
+    try:
+        with open("sample_conversation.txt", "r", encoding="utf-8") as f:
+            return f.read()
+    except Exception:
+        return ""
+
 def display_badge(status: str):
     colors = {
         "confirmed_fact": "#28a745", # Green
@@ -96,7 +103,8 @@ def main():
     
     with st.sidebar:
         st.header("Input Conversation")
-        manual_conversation = st.text_area("Paste conversation here...", height=300)
+        default_convo = load_sample_conversation()
+        manual_conversation = st.text_area("Paste conversation here...", value=default_convo, height=300)
         
         st.divider()
         st.subheader("Or Upload File")
