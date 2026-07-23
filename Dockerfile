@@ -49,8 +49,9 @@ COPY --from=builder /app/.venv /app/.venv
 # Copy the rest of the application code
 COPY . .
 
-# Expose the Streamlit web port
-EXPOSE 8501
+# Default port if not provided by Railway
+ENV PORT=8501
+EXPOSE $PORT
 
-# Run the app natively through the cached virtual environment
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"]
+# Run using shell to correctly evaluate the $PORT variable provided by Railway
+CMD sh -c "streamlit run app.py --server.port=$PORT --server.address=0.0.0.0"
