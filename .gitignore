@@ -53,6 +53,8 @@ docker-compose.override.yml
 .mypy_cache/
 coverage.xml
 .coverage
+htmlcov/
+.tox/
 
 # Legacy
 legacy_backend/
