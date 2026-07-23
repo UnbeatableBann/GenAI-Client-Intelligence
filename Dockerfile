@@ -1,32 +1,56 @@
-FROM python:3.12-slim
+# -------------------------------------
+# Stage 1: Builder
+# -------------------------------------
+FROM python:3.12-slim AS builder
 
-# Set environment variables for Python
+# Set env vars to prevent writing pyc files and enable uv bytecode compilation
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    UV_COMPILE_BYTECODE=1
 
-# Install required system dependencies (for building some Python packages)
+# Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv for blazingly fast dependency management
+# Install uv package manager
 RUN pip install uv
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the project configuration and the generated lockfile first
+# Copy dependency files first to maximize Docker layer caching
 COPY pyproject.toml uv.lock ./
 
-# Install the dependencies precisely according to uv.lock (without dev dependencies)
+# Sync dependencies into a local virtual environment (.venv)
 RUN uv sync --frozen --no-dev
 
-# Copy the rest of the application files
+
+# -------------------------------------
+# Stage 2: Runtime
+# -------------------------------------
+FROM python:3.12-slim
+
+# Add the virtual environment to PATH so python/streamlit commands work automatically
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/app/.venv/bin:$PATH"
+
+# Install only essential runtime dependencies (e.g. libpq5 for DB drivers)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy ONLY the optimized virtual environment from the builder stage
+COPY --from=builder /app/.venv /app/.venv
+
+# Copy the rest of the application code
 COPY . .
 
-# Expose the Streamlit port
+# Expose the Streamlit web port
 EXPOSE 8501
 
-# Run the Streamlit application using uv
-CMD ["uv", "run", "streamlit", "run", "app.py", "--server.address=0.0.0.0"]
+# Run the app natively through the cached virtual environment
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"]
