@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python / Environment
+.venv
+venv
+env
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.db
+.env
+.env.local
+.env.*.local
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Tooling Caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# IDE / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+docker-compose.yml
+docker-compose.override.yml
+
+# Project Specific
+legacy_backend/
+tests/
+Makefile
