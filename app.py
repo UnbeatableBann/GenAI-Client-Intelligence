@@ -343,7 +343,7 @@ def main():
             st.session_state['assistant_cache'] = {}
             
         def set_query(q):
-            st.session_state['user_query'] = q
+            st.session_state['user_query_input'] = q
             
         st.write("**Suggested Questions:**")
         suggested = generate_suggested_questions(report)
@@ -352,9 +352,7 @@ def main():
         for i, q in enumerate(suggested):
             cols[i % 4].button(q, on_click=set_query, args=(q,), key=f"sugg_{i}")
             
-        user_query = st.text_input("Ask anything about this conversation...", 
-                                   value=st.session_state.get('user_query', ''),
-                                   key="user_query_input")
+        user_query = st.text_input("Ask anything about this conversation...", key="user_query_input")
                                    
         if st.button("Ask", type="primary") and user_query:
             saved_conversation = st.session_state.get('conversation', '')
