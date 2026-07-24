@@ -1,0 +1,230 @@
+{
+  "extracted_info": {
+    "weekly_summary": {
+      "value": "The client experienced fluctuating energy levels, persistent acidity, and bloating throughout the week. Sleep was initially low (around 5 to 5.5 hours) but improved to 8 hours by Day 8. The client managed to maintain physical activity through walking, stretching, and running, but struggled with meal planning and consistent nutrition due to a hectic school schedule and high work stress. Weight was reported at 83 kg.",
+      "status": "client_reported",
+      "evidence": [
+        "Slept only around 5 hours last night.",
+        "Still having acidity and bloating.",
+        "I am not getting enough time to plan meals.",
+        "There is a lot of office pressure and politics going on.",
+        "Weight is around 83 kg."
+      ],
+      "confidence": 0.9
+    },
+    "nutrition": {
+      "value": "Meals included tea, soaked nuts, kadhi with soya, green vegetables, apple, paneer, coconut water, prunes, seeds, curd, vegetable chapatis, roasted chana, and kala chana. The client struggled with meal planning, skipped some evening meals, and had low protein intake on some days.",
+      "status": "client_reported",
+      "evidence": [
+        "Had tea and some soaked nuts.",
+        "Lunch was kadhi with soya and green vegetables.",
+        "Didn’t eat much in the evening. Just a small piece of paneer.",
+        "Breakfast was 1.5 vegetable chapatis with seeds and ajwain.",
+        "I had roasted chana and kala chana."
+      ],
+      "confidence": 0.9
+    },
+    "exercise": {
+      "value": "Physical activity consisted of household chores (mopping and sweeping), Surya Namaskar, walking (including 15-minute post-meal walks), stretching, and running.",
+      "status": "client_reported",
+      "evidence": [
+        "Did some mopping, sweeping, Surya Namaskar and walking inside the house.",
+        "Did around 20 minutes walking, stretching and breathing today.",
+        "Did 20 minutes stretching and running.",
+        "Did 30 minutes exercise."
+      ],
+      "confidence": 0.9
+    },
+    "steps": {
+      "value": "Steps reported were around 8,000 on Day 3, 4,500 (so far) on Day 4, 6,000 on Day 7, and around 8,000 on Day 8.",
+      "status": "client_reported",
+      "evidence": [
+        "Steps around 8,000",
+        "4,500 steps so far.",
+        "Steps 6,000 today."
+      ],
+      "confidence": 1.0
+    },
+    "sleep": {
+      "value": "Sleep duration was low at the beginning and middle of the week (around 5 to 5.5 hours) but improved to 8 hours by Day 8.",
+      "status": "client_reported",
+      "evidence": [
+        "Slept only around 5 hours last night.",
+        "Sleep 5 hours",
+        "Sleep around 5.5 hours.",
+        "Slept better last night, around 8 hours."
+      ],
+      "confidence": 1.0
+    },
+    "water_intake": {
+      "value": "Water intake was reported as 4 litres on Day 3 and around 3.5 litres on Day 8.",
+      "status": "client_reported",
+      "evidence": [
+        "Water 4 litres",
+        "Water around 3.5 litres."
+      ],
+      "confidence": 1.0
+    },
+    "symptoms": {
+      "value": "The client experienced ongoing acidity and bloating on and off throughout the week.",
+      "status": "client_reported",
+      "evidence": [
+        "Feeling some acidity since morning.",
+        "Still having acidity and bloating.",
+        "Bloating is back and I feel like I have gained weight.",
+        "Still having bloating on and off."
+      ],
+      "confidence": 0.9
+    },
+    "stress": {
+      "value": "The client experienced high stress, office pressure, and politics at work, particularly on Day 7.",
+      "status": "client_reported",
+      "evidence": [
+        "There was a stressful situation at work.",
+        "There is a lot of office pressure and politics going on."
+      ],
+      "confidence": 0.9
+    },
+    "energy": {
+      "value": "Energy levels fluctuated significantly, starting happy, dropping to very low with extreme exhaustion on Day 7 (falling asleep during a meeting), and recovering on Day 8.",
+      "status": "client_reported",
+      "evidence": [
+        "Yesterday energy was very good. Today feeling low again.",
+        "During a meeting today I was so tired that my head went down on the table and I actually slept for a few seconds.",
+        "Feeling very low.",
+        "Energy feels much better today."
+      ],
+      "confidence": 0.9
+    },
+    "weight": {
+      "value": "Weight is around 83 kg. The client felt they had gained weight earlier in the week despite eating less.",
+      "status": "client_reported",
+      "evidence": [
+        "Weight seems slightly up even though I’m eating almost half of what I used to eat.",
+        "Weight is around 83 kg."
+      ],
+      "confidence": 1.0
+    },
+    "engagement_level": {
+      "value": "High. The client consistently shares daily updates on sleep, water, steps, and meals, and actively communicates symptoms and barriers to the coach.",
+      "status": "ai_inference",
+      "evidence": [
+        "Please keep sharing your daily updates for water, sleep, steps, exercise and meals.",
+        "Sorry I missed your call. There was a stressful situation at work."
+      ],
+      "confidence": 0.8
+    },
+    "key_barriers": {
+      "value": "Lack of time to plan meals due to a hectic school schedule and high work pressure/politics.",
+      "status": "client_reported",
+      "evidence": [
+        "I am not getting enough time to plan meals.",
+        "I had to go to school after a few days. Very hectic morning.",
+        "There is a lot of office pressure and politics going on."
+      ],
+      "confidence": 0.9
+    },
+    "pending_actions": {
+      "value": "Stock vegetables properly, set reminders for ACV around meal timings, and continue tracking sleep, bloating, meals, and movement.",
+      "status": "ai_inference",
+      "evidence": [
+        "I still need to stock vegetables properly. Will do it tomorrow.",
+        "Set a reminder around meal timings.",
+        "Yes, will do."
+      ],
+      "confidence": 0.8
+    },
+    "risk_flags": [
+      {
+        "title": "Extreme Fatigue and Sleep Deprivation",
+        "severity": "High",
+        "reason": "The client is experiencing severe exhaustion, to the point of falling asleep during a work meeting, compounded by multiple nights of only 5 to 5.5 hours of sleep.",
+        "evidence": [
+          "During a meeting today I was so tired that my head went down on the table and I actually slept for a few seconds.",
+          "Slept only around 5 hours last night.",
+          "Sleep around 5.5 hours."
+        ],
+        "confidence": 0.9
+      },
+      {
+        "title": "High Work Stress",
+        "severity": "Medium",
+        "reason": "The client reports significant office pressure and politics, which is impacting their energy levels and sleep.",
+        "evidence": [
+          "There was a stressful situation at work.",
+          "There is a lot of office pressure and politics going on."
+        ],
+        "confidence": 0.9
+      }
+    ],
+    "missing_information": [
+      "Specific food quantities or caloric intake for most days.",
+      "Consistent daily step counts for Days 1, 2, 5, and 6.",
+      "Consistent daily water intake for Days 1, 2, 4, 5, 6, and 7."
+    ]
+  },
+  "reasoning": {
+    "trends": [
+      {
+        "metric": "Sleep",
+        "trend": "Improving"
+      },
+      {
+        "metric": "Symptoms (Acidity and Bloating)",
+        "trend": "Stable"
+      },
+      {
+        "metric": "Energy",
+        "trend": "Fluctuating"
+      }
+    ],
+    "timeline": [
+      {
+        "day": "Day 3",
+        "events": [
+          "Achieved around 8,000 steps.",
+          "Drank 4 litres of water."
+        ]
+      },
+      {
+        "day": "Day 4",
+        "events": [
+          "Recorded 4,500 steps."
+        ]
+      },
+      {
+        "day": "Day 7",
+        "events": [
+          "Experienced high work stress and office pressure.",
+          "Suffered from extreme exhaustion, falling asleep briefly during a meeting.",
+          "Recorded 6,000 steps."
+        ]
+      },
+      {
+        "day": "Day 8",
+        "events": [
+          "Sleep duration improved significantly to 8 hours.",
+          "Energy levels recovered and felt much better.",
+          "Achieved around 8,000 steps.",
+          "Drank approximately 3.5 litres of water."
+        ]
+      },
+      {
+        "day": "Throughout the Week",
+        "events": [
+          "Struggled with low sleep (5 to 5.5 hours) in the early and middle parts of the week.",
+          "Experienced ongoing acidity and bloating on and off.",
+          "Felt weight was slightly up despite eating less.",
+          "Struggled with meal planning due to a hectic school schedule and work pressure."
+        ]
+      }
+    ],
+    "coach_recommendation": "Prioritize stabilizing the client's sleep schedule to prevent extreme fatigue episodes, such as falling asleep during meetings. Address the persistent acidity and bloating by helping the client implement the pending action of setting reminders for ACV around meal times. To overcome the barrier of a hectic schedule, collaborate on simple, low-prep meal planning strategies (like pre-stocking vegetables and utilizing quick protein sources like paneer or roasted chana) to ensure consistent nutrition and prevent skipped evening meals.",
+    "suggested_follow_up_questions": [
+      "Could you provide more details on the specific food quantities or portion sizes you are consuming during your meals?",
+      "What were your step counts and water intake on Days 1, 2, 5, and 6 to help complete your weekly tracking?",
+      "Have you been able to set the reminders for ACV around your meal times, and have you noticed any changes in your acidity or bloating since doing so?",
+      "How can we work together to make meal prep easier for you during highly stressful or hectic school mornings?"
+    ]
+  }
+}

@@ -61,3 +61,6 @@ htmlcov/
 legacy_backend/
 
 todo
+
+# Temporary scripts and data
+extract_sample.py

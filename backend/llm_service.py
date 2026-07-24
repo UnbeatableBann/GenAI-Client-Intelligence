@@ -26,7 +26,7 @@ def get_client():
 def _call_gemini_with_retry(client, prompt: str, text: str, schema_class: type[BaseModel]) -> str:
     logger.info(f"Calling Gemini API for schema {schema_class.__name__}")
     response = client.models.generate_content(
-        model='gemini-3-flash-preview',
+        model='gemini-3.5-flash',
         contents=[prompt, text],
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
